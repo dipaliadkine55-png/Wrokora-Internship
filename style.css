@@ -1,88 +1,248 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background: linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    min-height: 100vh;
+    padding: 40px 20px;
 }
 
 .container {
-    width: 90%;
-    max-width: 900px;
-    margin: 40px auto;
+    max-width: 600px;
+    margin: auto;
 }
 
-h1 {
-    text-align: center;
-}
 
-form {
+/* Form */
+
+.form-box {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.form-box h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+
+    margin-top: 15px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
 }
 
 input,
 textarea {
     width: 100%;
+
     padding: 12px;
-    margin-bottom: 12px;
+
     border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #667eea;
 }
 
 textarea {
-    height: 120px;
+    height: 100px;
     resize: vertical;
 }
 
+small {
+    color: #888;
+}
+
 button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 13px;
+
     border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    background: #007bff;
+
+    border-radius: 8px;
+
+    background: #667eea;
+
     color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #5568d8;
 }
 
-#search {
+
+/* Profile Card */
+
+.profile-card {
     background: white;
+
+    padding: 40px 30px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-#notes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.avatar {
+    width: 100px;
+    height: 100px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #667eea;
+
+    color: white;
+
+    font-size: 45px;
+    font-weight: bold;
 }
 
-.note {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.profile-card h1 {
+    margin-bottom: 15px;
 }
 
-.note h3 {
-    margin-top: 0;
+.bio {
+    color: #666;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
 }
 
-.note p {
-    color: #555;
-    white-space: pre-wrap;
+
+/* Skills */
+
+.skills {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
 }
 
-.delete {
-    background: #dc3545;
+.skill {
+    background: #eef0ff;
+
+    color: #5568d8;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 14px;
 }
 
-.delete:hover {
-    background: #a71d2a;
+
+/* Social links */
+
+.social-links {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+}
+
+.social-links a {
+    text-decoration: none;
+
+    background: #333;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+}
+
+.social-links a:hover {
+    background: #555;
+}
+
+
+/* Create button */
+
+.create-button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    background: #667eea;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    .form-box,
+    .profile-card {
+        padding: 25px 20px;
+    }
+
 }

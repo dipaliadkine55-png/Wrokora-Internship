@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Quick Notes</title>
+    <title>User Profile Card</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,40 +13,20 @@
 
     <div class="container">
 
-        <h1>📝 Quick Notes</h1>
+        <div class="profile-card">
 
-        <form id="noteForm">
+            <!-- Avatar -->
+            <div class="avatar">
+                DA
+            </div>
 
-            <input
-                type="text"
-                id="title"
-                placeholder="Note title"
-                required
-            >
+            <!-- User Information -->
+            <h1>Dipali Adkine</h1>
 
-            <textarea
-                id="content"
-                placeholder="Write your note..."
-                required
-            ></textarea>
+            <p class="role">
+                Full Stack Developer
+            </p>
 
-            <button type="submit">
-                Add Note
-            </button>
-
-        </form>
-
-        <input
-            type="text"
-            id="search"
-            placeholder="Search notes..."
-        >
-
-        <div id="notes"></div>
-
-    </div>
-
-    <script src="script.js"></script>
-
-</body>
-</html>
+            <p class="bio">
+                Passionate developer who loves building
+                modern and user-friendly web applications.
