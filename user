@@ -1,0 +1,23 @@
+User
+ │
+ ▼
+HTML Form
+ │
+ │ POST /profile
+ ▼
+Express.js
+ │
+ ├── Process Name
+ ├── Process Bio
+ ├── Split Skills
+ ├── Process Social Links
+ │
+ ▼
+MongoDB
+ │
+ │ Save profile
+ ▼
+EJS Template
+ │
+ ▼
+Dynamic Profile Card
