@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#search {
+    background: white;
+}
+
+#notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.note {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.note h3 {
+    margin-top: 0;
+}
+
+.note p {
+    color: #555;
+    white-space: pre-wrap;
+}
+
+.delete {
+    background: #dc3545;
+}
+
+.delete:hover {
+    background: #a71d2a;
+}
