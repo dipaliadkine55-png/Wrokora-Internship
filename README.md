@@ -1,2 +1,2 @@
-# wrokora internship task 1 
-quick note application
+# wrokora internship task2
+user profile card generator
