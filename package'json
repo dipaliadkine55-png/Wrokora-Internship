@@ -1,0 +1,5 @@
+mkdir team-availability
+cd team-availability
+
+npm init -y
+npm install express mongoose dotenv

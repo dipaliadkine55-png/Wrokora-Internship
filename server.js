@@ -1,40 +1,156 @@
-const express = require('express');
-const fs = require('fs');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const path = require("path");
+require("dotenv").config();
+
+const TeamMember = require("./models/TeamMember");
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
 
-const NOTES_FILE = './notes.json';
+const PORT = process.env.PORT || 3000;
 
-const loadNotes = () => {
-  if (!fs.existsSync(NOTES_FILE)) return [];
-  return JSON.parse(fs.readFileSync(NOTES_FILE));
-};
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-const saveNotes = (notes) => {
-  fs.writeFileSync(NOTES_FILE, JSON.stringify(notes, null, 2));
-};
 
-app.get('/notes', (req, res) => {
-  res.json(loadNotes());
+// Connect MongoDB
+mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB connected");
+
+        app.listen(PORT, () => {
+            console.log(
+                `Server running at http://localhost:${PORT}`
+            );
+        });
+    })
+    .catch(error => {
+        console.error(
+            "MongoDB connection failed:",
+            error
+        );
+    });
+
+
+// GET all team members
+app.get("/api/team", async (req, res) => {
+
+    try {
+
+        const members = await TeamMember.find();
+
+        res.json(members);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Unable to fetch team members"
+        });
+    }
 });
 
-app.post('/notes', (req, res) => {
-  const notes = loadNotes();
-  const newNote = { id: Date.now(), text: req.body.text };
-  notes.push(newNote);
-  saveNotes(notes);
-  res.json(newNote);
+
+// POST - Add team member
+app.post("/api/team", async (req, res) => {
+
+    try {
+
+        const { name, role } = req.body;
+
+        if (!name || !role) {
+            return res.status(400).json({
+                message: "Name and role are required"
+            });
+        }
+
+        const member = await TeamMember.create({
+            name,
+            role,
+            status: "Available"
+        });
+
+        res.status(201).json(member);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Unable to add team member"
+        });
+    }
 });
 
-app.delete('/notes/:id', (req, res) => {
-  let notes = loadNotes();
-  notes = notes.filter(note => note.id != req.params.id);
-  saveNotes(notes);
-  res.json({ success: true });
+
+// PATCH - Update status
+app.patch("/api/team/:id/status", async (req, res) => {
+
+    try {
+
+        const { status } = req.body;
+
+        const allowedStatuses = [
+            "Available",
+            "Busy",
+            "Away"
+        ];
+
+        if (!allowedStatuses.includes(status)) {
+            return res.status(400).json({
+                message: "Invalid status"
+            });
+        }
+
+        const member = await TeamMember.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!member) {
+            return res.status(404).json({
+                message: "Team member not found"
+            });
+        }
+
+        res.json(member);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Unable to update status"
+        });
+    }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+
+// DELETE - Remove team member
+app.delete("/api/team/:id", async (req, res) => {
+
+    try {
+
+        const member =
+            await TeamMember.findByIdAndDelete(
+                req.params.id
+            );
+
+        if (!member) {
+            return res.status(404).json({
+                message: "Team member not found"
+            });
+        }
+
+        res.json({
+            message: "Team member deleted"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: "Unable to delete team member"
+        });
+    }
+});
