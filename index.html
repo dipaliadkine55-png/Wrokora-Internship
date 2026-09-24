@@ -1,32 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>User Profile Card</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Team Availability Tracker</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
     <div class="container">
 
-        <div class="profile-card">
+        <header>
 
-            <!-- Avatar -->
-            <div class="avatar">
-                DA
-            </div>
+            <h1>👥 Team Availability</h1>
 
-            <!-- User Information -->
-            <h1>Dipali Adkine</h1>
-
-            <p class="role">
-                Full Stack Developer
+            <p>
+                Monitor your team's current availability
             </p>
 
-            <p class="bio">
-                Passionate developer who loves building
-                modern and user-friendly web applications.
+        </header>
+
+
+        <!-- Add Member -->
+
+        <div class="add-member">
+
+            <h2>Add Team Member</h2>
+
+            <form id="memberForm">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Member name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="role"
+                    placeholder="Role"
+                    required
+                >
+
+                <button type="submit">
+                    Add Member
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Dashboard -->
+
+        <div class="dashboard-header">
+
+            <h2>Team Members</h2>
+
+            <span id="lastUpdated">
+                Updating...
+            </span>
+
+        </div>
+
+
+        <div
+            id="teamContainer"
+            class="team-grid"
+        ></div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

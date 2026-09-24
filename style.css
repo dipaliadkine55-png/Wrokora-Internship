@@ -6,243 +6,284 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(
-        135deg,
-        #667eea,
-        #764ba2
-    );
 
-    min-height: 100vh;
-    padding: 40px 20px;
+    background: #f4f6f9;
+
+    color: #333;
 }
 
 .container {
-    max-width: 600px;
-    margin: auto;
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto;
 }
 
 
-/* Form */
+/* Header */
 
-.form-box {
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.form-box h1 {
+header {
     text-align: center;
+
+    margin-bottom: 35px;
+}
+
+header h1 {
+    color: #2563eb;
+
     margin-bottom: 10px;
 }
 
-.subtitle {
-    text-align: center;
+header p {
     color: #777;
+}
+
+
+/* Add Member */
+
+.add-member {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.08);
+
     margin-bottom: 30px;
 }
 
-label {
-    display: block;
-
-    margin-top: 15px;
-    margin-bottom: 7px;
-
-    font-weight: bold;
+.add-member h2 {
+    margin-bottom: 20px;
 }
 
-input,
-textarea {
-    width: 100%;
+form {
+    display: flex;
+
+    gap: 12px;
+}
+
+input {
+    flex: 1;
 
     padding: 12px;
 
     border: 1px solid #ddd;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     font-size: 15px;
-
-    outline: none;
-}
-
-input:focus,
-textarea:focus {
-    border-color: #667eea;
-}
-
-textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-small {
-    color: #888;
 }
 
 button {
-    width: 100%;
-
-    margin-top: 25px;
-
-    padding: 13px;
-
     border: none;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
-    background: #667eea;
+    padding: 12px 18px;
+
+    background: #2563eb;
 
     color: white;
-
-    font-size: 16px;
 
     cursor: pointer;
 }
 
 button:hover {
-    background: #5568d8;
+    background: #1d4ed8;
 }
 
 
-/* Profile Card */
+/* Dashboard */
 
-.profile-card {
+.dashboard-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+#lastUpdated {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* Team Grid */
+
+.team-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* Member Card */
+
+.member-card {
     background: white;
 
-    padding: 40px 30px;
+    padding: 22px;
 
-    text-align: center;
-
-    border-radius: 20px;
+    border-radius: 12px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.2);
+        0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.member-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
-
-    margin: 0 auto 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 55px;
+    height: 55px;
 
     border-radius: 50%;
 
-    background: #667eea;
-
-    color: white;
-
-    font-size: 45px;
-    font-weight: bold;
-}
-
-.profile-card h1 {
-    margin-bottom: 15px;
-}
-
-.bio {
-    color: #666;
-
-    line-height: 1.6;
-
-    margin-bottom: 25px;
-}
-
-
-/* Skills */
-
-.skills {
     display: flex;
 
     justify-content: center;
 
-    flex-wrap: wrap;
+    align-items: center;
 
-    gap: 8px;
+    background: #2563eb;
 
-    margin-bottom: 25px;
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: bold;
 }
 
-.skill {
-    background: #eef0ff;
+.member-info h3 {
+    margin-bottom: 5px;
+}
 
-    color: #5568d8;
+.member-info p {
+    color: #777;
+}
+
+
+/* Status */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
 
     padding: 7px 12px;
 
     border-radius: 20px;
 
     font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.status::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: currentColor;
 }
 
 
-/* Social links */
+/* Status colors */
 
-.social-links {
+.available {
+    color: #15803d;
+
+    background: #dcfce7;
+}
+
+.busy {
+    color: #dc2626;
+
+    background: #fee2e2;
+}
+
+.away {
+    color: #ca8a04;
+
+    background: #fef9c3;
+}
+
+
+/* Status Buttons */
+
+.status-buttons {
     display: flex;
 
-    justify-content: center;
+    gap: 8px;
 
     flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-bottom: 30px;
 }
 
-.social-links a {
-    text-decoration: none;
+.status-buttons button {
+    background: #f1f5f9;
 
-    background: #333;
+    color: #333;
 
-    color: white;
+    padding: 8px 12px;
 
-    padding: 9px 15px;
-
-    border-radius: 7px;
+    font-size: 13px;
 }
 
-.social-links a:hover {
-    background: #555;
+.status-buttons button:hover {
+    background: #dbeafe;
 }
 
+.delete-btn {
+    margin-top: 15px;
 
-/* Create button */
+    background: #ef4444;
+}
 
-.create-button {
-    display: inline-block;
-
-    text-decoration: none;
-
-    background: #667eea;
-
-    color: white;
-
-    padding: 12px 20px;
-
-    border-radius: 8px;
+.delete-btn:hover {
+    background: #dc2626;
 }
 
 
-/* Responsive */
+/* Mobile */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
-    body {
-        padding: 20px 10px;
+    form {
+        flex-direction: column;
     }
 
-    .form-box,
-    .profile-card {
-        padding: 25px 20px;
+    .dashboard-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
     }
 
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
 }
