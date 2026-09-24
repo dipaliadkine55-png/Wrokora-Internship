@@ -1,277 +1,186 @@
-const teamContainer =
-    document.getElementById("teamContainer");
+const coffeeContainer =
+    document.getElementById("coffeeContainer");
 
-const memberForm =
-    document.getElementById("memberForm");
-
-const nameInput =
-    document.getElementById("name");
-
-const roleInput =
-    document.getElementById("role");
-
-const lastUpdated =
-    document.getElementById("lastUpdated");
+const leaderboard =
+    document.getElementById("leaderboard");
 
 
-// Load team members
-async function loadTeam() {
+// Load coffees
+async function loadCoffees() {
 
     try {
 
         const response =
-            await fetch("/api/team");
+            await fetch("/api/coffees");
 
-        const members =
+        if (!response.ok) {
+            throw new Error(
+                "Unable to load coffees"
+            );
+        }
+
+        const coffees =
             await response.json();
 
-        displayTeam(members);
+        displayCoffees(coffees);
 
-        lastUpdated.textContent =
-            "Last updated: " +
-            new Date().toLocaleTimeString();
+        displayLeaderboard(coffees);
 
     } catch (error) {
 
         console.error(error);
 
-        teamContainer.innerHTML = `
-            <p>Unable to load team members.</p>
+        coffeeContainer.innerHTML = `
+            <p>
+                Unable to load coffee ratings.
+            </p>
         `;
     }
 }
 
 
-// Display team
-function displayTeam(members) {
+// Display coffee cards
+function displayCoffees(coffees) {
 
-    teamContainer.innerHTML = "";
+    coffeeContainer.innerHTML = "";
 
-    if (members.length === 0) {
-
-        teamContainer.innerHTML = `
-            <p>No team members available.</p>
-        `;
-
-        return;
-    }
-
-    members.forEach(member => {
+    coffees.forEach(coffee => {
 
         const card =
             document.createElement("div");
 
-        card.className = "member-card";
-
-        const firstLetter =
-            member.name
-                .charAt(0)
-                .toUpperCase();
-
-        const statusClass =
-            member.status.toLowerCase();
+        card.className = "coffee-card";
 
         card.innerHTML = `
-            <div class="member-top">
-
-                <div class="avatar">
-                    ${firstLetter}
-                </div>
-
-                <div class="member-info">
-
-                    <h3>
-                        ${escapeHTML(member.name)}
-                    </h3>
-
-                    <p>
-                        ${escapeHTML(member.role)}
-                    </p>
-
-                </div>
-
+            <div class="coffee-icon">
+                ☕
             </div>
 
-            <div class="status ${statusClass}">
-                ${member.status}
-            </div>
+            <h2>
+                ${escapeHTML(coffee.name)}
+            </h2>
 
-            <div class="status-buttons">
+            <p class="description">
+                ${escapeHTML(coffee.description)}
+            </p>
 
-                <button
-                    onclick="updateStatus(
-                        '${member._id}',
-                        'Available'
-                    )"
-                >
-                    Available
-                </button>
-
-                <button
-                    onclick="updateStatus(
-                        '${member._id}',
-                        'Busy'
-                    )"
-                >
-                    Busy
-                </button>
-
-                <button
-                    onclick="updateStatus(
-                        '${member._id}',
-                        'Away'
-                    )"
-                >
-                    Away
-                </button>
-
-            </div>
+            <p class="vote-count">
+                ⭐ ${coffee.votes} votes
+            </p>
 
             <button
-                class="delete-btn"
-                onclick="deleteMember('${member._id}')"
+                class="vote-btn"
+                data-id="${coffee._id}"
             >
-                Delete
+                Vote
             </button>
         `;
 
-        teamContainer.appendChild(card);
+        const button =
+            card.querySelector(".vote-btn");
+
+        button.addEventListener(
+            "click",
+            () => voteCoffee(
+                coffee._id,
+                button
+            )
+        );
+
+        coffeeContainer.appendChild(card);
     });
 }
 
 
-// Add member
-memberForm.addEventListener(
-    "submit",
-    async (event) => {
+// Vote for coffee
+async function voteCoffee(id, button) {
 
-        event.preventDefault();
+    button.disabled = true;
 
-        const name =
-            nameInput.value.trim();
-
-        const role =
-            roleInput.value.trim();
-
-        try {
-
-            const response =
-                await fetch("/api/team", {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        name,
-                        role
-                    })
-                });
-
-            if (!response.ok) {
-                throw new Error(
-                    "Unable to add member"
-                );
-            }
-
-            nameInput.value = "";
-            roleInput.value = "";
-
-            loadTeam();
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert(
-                "Unable to add team member."
-            );
-        }
-    }
-);
-
-
-// Update status
-async function updateStatus(id, status) {
+    button.textContent = "Voting...";
 
     try {
 
         const response =
             await fetch(
-                `/api/team/${id}/status`,
+                `/api/coffees/${id}/vote`,
                 {
-                    method: "PATCH",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        status
-                    })
+                    method: "POST"
                 }
             );
 
         if (!response.ok) {
             throw new Error(
-                "Unable to update status"
+                "Unable to record vote"
             );
         }
 
-        loadTeam();
+        /*
+         * Reload the data without
+         * refreshing the page.
+         */
+        await loadCoffees();
 
     } catch (error) {
 
         console.error(error);
 
         alert(
-            "Unable to update member status."
+            "Unable to record your vote."
         );
+
+        button.disabled = false;
+
+        button.textContent = "Vote";
     }
 }
 
 
-// Delete member
-async function deleteMember(id) {
+// Leaderboard
+function displayLeaderboard(coffees) {
 
-    if (
-        !confirm(
-            "Delete this team member?"
-        )
-    ) {
+    leaderboard.innerHTML = "";
+
+    const sorted =
+        [...coffees]
+            .sort(
+                (a, b) =>
+                    b.votes - a.votes
+            )
+            .slice(0, 5);
+
+    if (sorted.length === 0) {
+
+        leaderboard.innerHTML =
+            "<p>No ratings yet.</p>";
+
         return;
     }
 
-    try {
+    sorted.forEach((coffee, index) => {
 
-        await fetch(
-            `/api/team/${id}`,
-            {
-                method: "DELETE"
-            }
-        );
+        const item =
+            document.createElement("div");
 
-        loadTeam();
+        item.className = "leader-item";
 
-    } catch (error) {
+        item.innerHTML = `
+            <div>
+                <span class="rank">
+                    #${index + 1}
+                </span>
 
-        console.error(error);
+                ${escapeHTML(coffee.name)}
+            </div>
 
-        alert(
-            "Unable to delete team member."
-        );
-    }
+            <span class="leader-votes">
+                ⭐ ${coffee.votes}
+            </span>
+        `;
+
+        leaderboard.appendChild(item);
+    });
 }
-
-
-// Auto-refresh every 5 seconds
-setInterval(() => {
-    loadTeam();
-}, 5000);
 
 
 // Prevent HTML injection
@@ -287,4 +196,4 @@ function escapeHTML(text) {
 
 
 // Initial load
-loadTeam();
+loadCoffees();

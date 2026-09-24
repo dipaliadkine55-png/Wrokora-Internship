@@ -7,9 +7,9 @@
 body {
     font-family: Arial, sans-serif;
 
-    background: #f4f6f9;
+    background: #f7f3ef;
 
-    color: #333;
+    color: #3d2b1f;
 }
 
 .container {
@@ -29,7 +29,9 @@ header {
 }
 
 header h1 {
-    color: #2563eb;
+    font-size: 38px;
+
+    color: #6f4e37;
 
     margin-bottom: 10px;
 }
@@ -39,251 +41,155 @@ header p {
 }
 
 
-/* Add Member */
+/* Coffee grid */
 
-.add-member {
+.coffee-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* Coffee card */
+
+.coffee-card {
     background: white;
 
     padding: 25px;
 
-    border-radius: 12px;
+    border-radius: 15px;
+
+    text-align: center;
 
     box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.08);
-
-    margin-bottom: 30px;
+        0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.add-member h2 {
-    margin-bottom: 20px;
+.coffee-icon {
+    font-size: 55px;
+
+    margin-bottom: 15px;
 }
 
-form {
-    display: flex;
-
-    gap: 12px;
+.coffee-card h2 {
+    margin-bottom: 10px;
 }
 
-input {
-    flex: 1;
+.description {
+    color: #777;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+.vote-count {
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: #6f4e37;
+
+    margin-bottom: 15px;
+}
+
+
+/* Vote button */
+
+.vote-btn {
+    width: 100%;
 
     padding: 12px;
 
-    border: 1px solid #ddd;
-
-    border-radius: 7px;
-
-    font-size: 15px;
-}
-
-button {
     border: none;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
-    padding: 12px 18px;
-
-    background: #2563eb;
+    background: #6f4e37;
 
     color: white;
+
+    font-size: 15px;
 
     cursor: pointer;
 }
 
-button:hover {
-    background: #1d4ed8;
+.vote-btn:hover {
+    background: #4f3626;
+}
+
+.vote-btn:disabled {
+    background: #aaa;
+
+    cursor: not-allowed;
 }
 
 
-/* Dashboard */
+/* Leaderboard */
 
-.dashboard-header {
+.leaderboard {
+    margin-top: 40px;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.leaderboard h2 {
+    margin-bottom: 20px;
+}
+
+.leader-item {
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
 
-    margin-bottom: 20px;
+    padding: 14px;
+
+    border-bottom: 1px solid #eee;
 }
 
-#lastUpdated {
-    color: #777;
-
-    font-size: 14px;
+.leader-item:last-child {
+    border-bottom: none;
 }
 
-
-/* Team Grid */
-
-.team-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
-
-    gap: 20px;
-}
-
-
-/* Member Card */
-
-.member-card {
-    background: white;
-
-    padding: 22px;
-
-    border-radius: 12px;
-
-    box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.member-top {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 20px;
-}
-
-.avatar {
-    width: 55px;
-    height: 55px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: #2563eb;
-
-    color: white;
-
-    font-size: 20px;
-
-    font-weight: bold;
-}
-
-.member-info h3 {
-    margin-bottom: 5px;
-}
-
-.member-info p {
-    color: #777;
-}
-
-
-/* Status */
-
-.status {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-size: 14px;
-
+.rank {
     font-weight: bold;
 
-    margin-bottom: 15px;
+    margin-right: 10px;
 }
 
-.status::before {
-    content: "";
+.leader-votes {
+    font-weight: bold;
 
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: currentColor;
-}
-
-
-/* Status colors */
-
-.available {
-    color: #15803d;
-
-    background: #dcfce7;
-}
-
-.busy {
-    color: #dc2626;
-
-    background: #fee2e2;
-}
-
-.away {
-    color: #ca8a04;
-
-    background: #fef9c3;
-}
-
-
-/* Status Buttons */
-
-.status-buttons {
-    display: flex;
-
-    gap: 8px;
-
-    flex-wrap: wrap;
-}
-
-.status-buttons button {
-    background: #f1f5f9;
-
-    color: #333;
-
-    padding: 8px 12px;
-
-    font-size: 13px;
-}
-
-.status-buttons button:hover {
-    background: #dbeafe;
-}
-
-.delete-btn {
-    margin-top: 15px;
-
-    background: #ef4444;
-}
-
-.delete-btn:hover {
-    background: #dc2626;
+    color: #6f4e37;
 }
 
 
 /* Mobile */
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
 
-    form {
-        flex-direction: column;
+    .container {
+        width: 95%;
+        margin: 25px auto;
     }
 
-    .dashboard-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 8px;
+    header h1 {
+        font-size: 30px;
     }
 
-    .team-grid {
+    .coffee-grid {
         grid-template-columns: 1fr;
     }
 }

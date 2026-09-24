@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Team Availability Tracker</title>
+    <title>Coffee Rating</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -22,63 +22,36 @@
 
         <header>
 
-            <h1>👥 Team Availability</h1>
+            <h1>☕ Coffee Rating</h1>
 
             <p>
-                Monitor your team's current availability
+                Vote for your favorite coffee.
             </p>
 
         </header>
 
 
-        <!-- Add Member -->
+        <!-- Coffee cards -->
 
-        <div class="add-member">
+        <section>
 
-            <h2>Add Team Member</h2>
+            <div
+                id="coffeeContainer"
+                class="coffee-grid"
+            ></div>
 
-            <form id="memberForm">
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Member name"
-                    required
-                >
-
-                <input
-                    type="text"
-                    id="role"
-                    placeholder="Role"
-                    required
-                >
-
-                <button type="submit">
-                    Add Member
-                </button>
-
-            </form>
-
-        </div>
+        </section>
 
 
-        <!-- Dashboard -->
+        <!-- Leaderboard -->
 
-        <div class="dashboard-header">
+        <section class="leaderboard">
 
-            <h2>Team Members</h2>
+            <h2>🏆 Top Rated Coffee</h2>
 
-            <span id="lastUpdated">
-                Updating...
-            </span>
+            <div id="leaderboard"></div>
 
-        </div>
-
-
-        <div
-            id="teamContainer"
-            class="team-grid"
-        ></div>
+        </section>
 
     </div>
 
