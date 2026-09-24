@@ -1,2 +1,2 @@
-# wrokora internship task3
-team availability traker
+# wrokora internship task 3
+coffe rating application
