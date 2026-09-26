@@ -1,2 +1,2 @@
 # wrokora internship task6
-quote generator history
+authentication JWT

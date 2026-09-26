@@ -1,0 +1,33 @@
+REGISTER
+   ↓
+Password
+   ↓
+bcrypt.hash()
+   ↓
+MongoDB
+
+LOGIN
+   ↓
+Email + Password
+   ↓
+bcrypt.compare()
+   ↓
+Valid?
+   ↓
+jwt.sign()
+   ↓
+HTTP-only Cookie
+
+Protected Request
+       ↓
+JWT Cookie
+       ↓
+auth middleware
+       ↓
+jwt.verify()
+       ↓
+Valid JWT?
+   ↙       ↘
+ YES        NO
+  ↓          ↓
+Route      401
