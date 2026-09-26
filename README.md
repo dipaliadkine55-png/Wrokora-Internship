@@ -1,2 +1,2 @@
-# wrokora internship task 3
-coffe rating application
+# wrokora internship task6
+quote generator history
